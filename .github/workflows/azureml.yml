@@ -6,7 +6,7 @@ env:
   ml-ws-connection: azmldemows
   ml-ws: aml-demo
   ml-rg: aml-demo
-  ml-ct: cpu-cluster-1
+  ml-ct: cpu
   ml-path: models/diabetes
   ml-exp: exp-test 
   ml-model-name: diabetes-model # Model name
