@@ -43,7 +43,7 @@ steps:
     scriptType: 'bash'
     inlineScript: |
       az ml job create -f job.yml -w $(ml-ws) -g $(ml-rg)
-      az ml job list
+      az ml job list -w $(ml-ws) -g $(ml-rg)
       ls
 
 - task: AzureCLI@2
