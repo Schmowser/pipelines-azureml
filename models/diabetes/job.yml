@@ -1,3 +1,4 @@
+name: diabetes-job
 command: >-
   python train.py
 environment:
