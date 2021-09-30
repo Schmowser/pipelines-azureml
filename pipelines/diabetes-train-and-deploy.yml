@@ -24,22 +24,15 @@ steps:
     inlineScript: 'az extension add -n ml -y'
 
 - task: AzureCLI@2
-  displayName: 'Create compute for training'
+  displayName: 'Create and list compute'
   inputs:
     azureSubscription: $(ml-ws-connection)
     workingDirectory: $(ml-path)
     scriptLocation: inlineScript
     scriptType: 'bash'
-    inlineScript: 'az ml compute create --name $(ml-ct) --size Standard_NC6 --min-instances 0 --max-instances 1 --type AmlCompute --resource-group $(ml-rg) --workspace-name $(ml-ws)'
-
-- task: AzureCLI@2
-  displayName: 'List computes'
-  inputs:
-    azureSubscription: $(ml-ws-connection)
-    workingDirectory: $(ml-path)
-    scriptLocation: inlineScript
-    scriptType: 'bash'
-    inlineScript: 'az ml compute list -w $(ml-ws) -g $(ml-rg)'
+    inlineScript: |
+      az ml compute create --name $(ml-ct) --size Standard_NC6 --min-instances 0 --max-instances 1 --type AmlCompute --resource-group $(ml-rg) --workspace-name $(ml-ws)
+      az ml compute list -w $(ml-ws) -g $(ml-rg)
 
 - task: AzureCLI@2
   displayName: 'Train model'
@@ -48,7 +41,9 @@ steps:
     workingDirectory: $(ml-path)
     scriptLocation: inlineScript
     scriptType: 'bash'
-    inlineScript: 'az ml job create -f ./pipelines/job.yml -w $(ml-ws) -g $(ml-rg)'
+    inlineScript: |
+      ls
+      az ml job create -f pipelines/job.yml -w $(ml-ws) -g $(ml-rg)
 
 - task: AzureCLI@2
   displayName: 'Delete compute'
