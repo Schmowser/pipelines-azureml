@@ -1,0 +1,12 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
+code: 
+  local_path: ../models/diabetes
+command: >-
+  python train.py
+environment:
+  docker:
+    image: python
+compute:
+  target: azureml:cpu-cluster
+experiment_name: diabetes-example
+description: Train a model on the Diabetes dataset.
