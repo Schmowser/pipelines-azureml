@@ -24,13 +24,13 @@ steps:
     inlineScript: 'az extension add -n ml -y'
 
 - task: AzureCLI@2
-  displayName: 'Attach folder to workspace'
+  displayName: 'List computes'
   inputs:
     azureSubscription: $(ml-ws-connection)
     workingDirectory: $(ml-path)
     scriptLocation: inlineScript
     scriptType: 'bash'
-    inlineScript: 'az ml folder attach -w $(ml-ws) -g $(ml-rg)'
+    inlineScript: 'az ml compute list -w $(ml-ws) -g $(ml-rg)'
 
 - task: AzureCLI@2
   displayName: 'Create compute for training'
@@ -40,7 +40,18 @@ steps:
     scriptLocation: inlineScript
     scriptType: 'bash'
     inlineScript: 'az ml compute create --name $(ml-ct) --size Standard_NC6 --min-instances 0 --max-instances 1 --type AmlCompute --resource-group $(ml-rg) --workspace-name $(ml-ws)'
-  
+
+- task: AzureCLI@2
+  displayName: 'Stop compute'
+  inputs:
+    azureSubscription: $(ml-ws-connection)
+    workingDirectory: $(ml-path)
+    scriptLocation: inlineScript
+    scriptType: 'bash'
+    inlineScript: 'az ml compute stop -n $(ml-ct) -w $(ml-ws) -g $(ml-rg)'
+
+
+
 - task: AzureCLI@2
   displayName: 'Train model'
   inputs:
