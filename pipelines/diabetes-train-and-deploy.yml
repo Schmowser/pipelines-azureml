@@ -48,7 +48,7 @@ steps:
     workingDirectory: $(ml-path)
     scriptLocation: inlineScript
     scriptType: 'bash'
-    inlineScript: 'az ml job create -f job.yml -w $(ml-ws) -g $(ml-rg)'
+    inlineScript: 'az ml job create -f ./pipelines/job.yml -w $(ml-ws) -g $(ml-rg)'
 
 - task: AzureCLI@2
   displayName: 'Delete compute'
