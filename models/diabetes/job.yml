@@ -1,3 +1,5 @@
+code:
+  local_path: .
 command: >-
   python train.py
 environment:
