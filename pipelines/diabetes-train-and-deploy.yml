@@ -42,7 +42,7 @@ steps:
     scriptLocation: inlineScript
     scriptType: 'bash'
     inlineScript: |
-      az ml job create -f job.yml -w $(ml-ws) -g $(ml-rg)
+      az ml job create -f job.yml -w $(ml-ws) -g $(ml-rg) --stream
       az ml job list -w $(ml-ws) -g $(ml-rg)
       az ml job stream -n diabetes-job -w $(ml-ws) -g $(ml-rg)
       az ml job download -n diabetes-job --outputs -w $(ml-ws) -g $(ml-rg)
