@@ -48,14 +48,14 @@ steps:
       az ml job download -n diabetes-job --outputs -w $(ml-ws) -g $(ml-rg)
       ls
 
-- task: AzureCLI@2
-  displayName: 'Delete compute'
-  inputs:
-    azureSubscription: $(ml-ws-connection)
-    workingDirectory: $(ml-path)
-    scriptLocation: inlineScript
-    scriptType: 'bash'
-    inlineScript: 'az ml compute delete -n $(ml-ct) -w $(ml-ws) -g $(ml-rg) -y'
+#- task: AzureCLI@2
+#  displayName: 'Delete compute'
+#  inputs:
+#    azureSubscription: $(ml-ws-connection)
+#    workingDirectory: $(ml-path)
+#    scriptLocation: inlineScript
+#    scriptType: 'bash'
+#    inlineScript: 'az ml compute delete -n $(ml-ct) -w $(ml-ws) -g $(ml-rg) -y'
 
 # Add potential approval step before registration of model
 
