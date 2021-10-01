@@ -1,10 +1,12 @@
 code:
   local_path: .
 command: >-
+  conda env create -f config/train-conda.yml
+  conda activate diabetes-training-env
   python train.py
 environment:
   docker:
-    image: python
+    image: conda/miniconda3
 compute:
   target: azureml:cpu-cluster
 experiment_name: diabetes-example
