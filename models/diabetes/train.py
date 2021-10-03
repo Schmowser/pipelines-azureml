@@ -8,7 +8,7 @@ from sklearn.datasets import load_diabetes
 from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
-#from azureml.core.run import Run
+from azureml.core.run import Run
 
 from utils import mylib
 
@@ -16,7 +16,7 @@ os.makedirs('./outputs', exist_ok=True)
 
 X, y = load_diabetes(return_X_y=True)
 
-#run = Run.get_context()
+run = Run.get_context()
 
 X_train, X_test, y_train, y_test = train_test_split(X, y,
                                                     test_size=0.2,
@@ -34,8 +34,8 @@ for alpha in alphas:
 
     preds = reg.predict(data["test"]["X"])
     mse = mean_squared_error(preds, data["test"]["y"])
-    #run.log('alpha', alpha)
-    #run.log('mse', mse)
+    run.log('alpha', alpha)
+    run.log('mse', mse)
 
     # Save model in the outputs folder so it automatically get uploaded when running on AML Compute
     model_file_name = 'ridge_{0:.2f}.pkl'.format(alpha)
