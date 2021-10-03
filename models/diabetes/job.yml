@@ -2,7 +2,7 @@ code:
   local_path: .
 command: |
   pip install --upgrade pip
-  pip install azureml-core==1.1.5.7 scikit-learn==0.21.3 numpy
+  pip install azureml-core==1.20.0 scikit-learn==0.21.3 numpy
   python train.py
 environment:
   docker:
