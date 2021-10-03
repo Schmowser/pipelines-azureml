@@ -1,13 +1,11 @@
 code:
   local_path: .
 command: |
-  conda info | grep -i 'base environment'
-  conda env create -f config/train-conda.yml
-  conda activate diabetes-training-env
+  pip install azureml-defaults scikit-learn numpy inference-schema[numpy-support]
   python train.py
 environment:
   docker:
-    image: docker pull mcr.microsoft.com/azureml/openmpi3.1.2-ubuntu18.04
+    image: python
 compute:
   target: azureml:cpu-cluster
 experiment_name: diabetes-example
