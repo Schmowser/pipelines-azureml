@@ -1,13 +1,13 @@
 code:
   local_path: .
 command: |
+  conda info | grep -i 'base environment'
   conda env create -f config/train-conda.yml
-  source ~/anaconda3/etc/profile.d/conda.sh
   conda activate diabetes-training-env
   python train.py
 environment:
   docker:
-    image: continuumio/anaconda3
+    image: docker pull mcr.microsoft.com/azureml/openmpi3.1.2-ubuntu18.04
 compute:
   target: azureml:cpu-cluster
 experiment_name: diabetes-example
