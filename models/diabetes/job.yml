@@ -1,7 +1,7 @@
 code:
   local_path: .
 command: |
-  pip install azureml-defaults scikit-learn numpy inference-schema[numpy-support]
+  pip install azureml-core==1.34.0 scikit-learn numpy
   python train.py
 environment:
   docker:
