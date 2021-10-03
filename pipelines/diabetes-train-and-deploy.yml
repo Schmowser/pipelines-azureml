@@ -23,15 +23,6 @@ steps:
     scriptType: 'bash'
     inlineScript: 'az extension add -n ml -y'
     
-#- task: AzureCLI@2
-#  displayName: 'Delete compute'
-#  inputs:
-#    azureSubscription: $(ml-ws-connection)
-#    workingDirectory: $(ml-path)
-#    scriptLocation: inlineScript
-#    scriptType: 'bash'
-#    inlineScript: 'az ml compute delete -n $(ml-ct) -w $(ml-ws) -g $(ml-rg) -y'
-
 - task: AzureCLI@2
   displayName: 'Create and list compute'
   inputs:
@@ -54,8 +45,17 @@ steps:
       az ml job create -f job.yml -w $(ml-ws) -g $(ml-rg) --stream
       az ml job download -n 865598c2-72f0-4653-82ed-13cc3c8a46bd --outputs -w $(ml-ws) -g $(ml-rg) 
       ls
-      
+     
 # Somehow get runid from az ml job create
+
+- task: AzureCLI@2
+  displayName: 'Delete compute'
+  inputs:
+    azureSubscription: $(ml-ws-connection)
+    workingDirectory: $(ml-path)
+    scriptLocation: inlineScript
+    scriptType: 'bash'
+    inlineScript: 'az ml compute delete -n $(ml-ct) -w $(ml-ws) -g $(ml-rg) -y'
 
 # Add potential approval step before registration of model
 
