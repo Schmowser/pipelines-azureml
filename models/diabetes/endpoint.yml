@@ -5,7 +5,7 @@ traffic:
   blue: 100
 
 deployments:
-  - name: diabetes
+  - name: blue
     model:
       name: model-1
       version: 1
