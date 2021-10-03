@@ -1,8 +1,8 @@
 code:
   local_path: .
 command: |
-  conda init bash
   conda env create -f config/train-conda.yml
+  source ~/anaconda3/etc/profile.d/conda.sh
   conda activate diabetes-training-env
   python train.py
 environment:
