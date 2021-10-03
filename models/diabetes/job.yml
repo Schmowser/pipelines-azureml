@@ -6,7 +6,7 @@ command: |
   python train.py
 environment:
   docker:
-    image: conda/miniconda3
+    image: continuumio/anaconda3
 compute:
   target: azureml:cpu-cluster
 experiment_name: diabetes-example
