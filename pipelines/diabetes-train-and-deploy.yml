@@ -23,14 +23,14 @@ steps:
     scriptType: 'bash'
     inlineScript: 'az extension add -n ml -y'
     
-- task: AzureCLI@2
-  displayName: 'Delete compute'
-  inputs:
-    azureSubscription: $(ml-ws-connection)
-    workingDirectory: $(ml-path)
-    scriptLocation: inlineScript
-    scriptType: 'bash'
-    inlineScript: 'az ml compute delete -n $(ml-ct) -w $(ml-ws) -g $(ml-rg) -y'
+#- task: AzureCLI@2
+#  displayName: 'Delete compute'
+#  inputs:
+#    azureSubscription: $(ml-ws-connection)
+#    workingDirectory: $(ml-path)
+#    scriptLocation: inlineScript
+#    scriptType: 'bash'
+#    inlineScript: 'az ml compute delete -n $(ml-ct) -w $(ml-ws) -g $(ml-rg) -y'
 
 - task: AzureCLI@2
   displayName: 'Create and list compute'
