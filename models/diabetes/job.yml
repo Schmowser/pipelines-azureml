@@ -5,7 +5,7 @@ command: |
   python train.py
 environment:
   docker:
-    image: python
+    image: python:3.6.2
 compute:
   target: azureml:cpu-cluster
 experiment_name: diabetes-example
