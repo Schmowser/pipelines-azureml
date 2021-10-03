@@ -52,10 +52,10 @@ steps:
     scriptType: 'bash'
     inlineScript: |
       az ml job create -f job.yml -w $(ml-ws) -g $(ml-rg) --stream
-      az ml job list -w $(ml-ws) -g $(ml-rg)
-      az ml job stream -n diabetes-job -w $(ml-ws) -g $(ml-rg)
-      az ml job download -n diabetes-job --outputs -w $(ml-ws) -g $(ml-rg)
+      az ml job download -n 865598c2-72f0-4653-82ed-13cc3c8a46bd --outputs -w $(ml-ws) -g $(ml-rg) 
       ls
+      
+# Somehow get runid from az ml job create
 
 # Add potential approval step before registration of model
 
