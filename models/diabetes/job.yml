@@ -1,9 +1,8 @@
 code:
   local_path: .
-command: >-
+command: |
   conda env create -f config/train-conda.yml
   activate diabetes-training-env
-  python train.py
 environment:
   docker:
     image: conda/miniconda3
