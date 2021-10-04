@@ -44,29 +44,19 @@ steps:
     inlineScript: |
       az ml job create -f job.yml -w $(ml-ws) -g $(ml-rg) --stream
       az ml job download -n 865598c2-72f0-4653-82ed-13cc3c8a46bd --outputs -w $(ml-ws) -g $(ml-rg) 
-      ls
      
 # Somehow get runid from az ml job create
 
-#- task: AzureCLI@2
-#  displayName: 'Delete compute'
-#  inputs:
-#    azureSubscription: $(ml-ws-connection)
-#    workingDirectory: $(ml-path)
-#    scriptLocation: inlineScript
-#    scriptType: 'bash'
-#    inlineScript: 'az ml compute delete -n $(ml-ct) -w $(ml-ws) -g $(ml-rg) -y'
+- task: AzureCLI@2
+  displayName: 'Delete compute'
+  inputs:
+    azureSubscription: $(ml-ws-connection)
+    workingDirectory: $(ml-path)
+    scriptLocation: inlineScript
+    scriptType: 'bash'
+    inlineScript: 'az ml compute delete -n $(ml-ct) -w $(ml-ws) -g $(ml-rg) -y'
 
 # Add potential approval step before registration of model
-
-#- task: AzureCLI@2
-#  displayName: 'Register model'
-#  inputs:
-#    azureSubscription: $(ml-ws-connection)
-#    workingDirectory: $(ml-path)
-#    scriptLocation: inlineScript
-#    scriptType: 'bash'
-#    inlineScript: 'az ml model register -n $(ml-model-name) -f run.json --asset-path outputs/ridge_0.95.pkl -t model.json'
 
 - task: AzureCLI@2
   displayName: 'Deploy endpoint (Register model etc.)'
@@ -76,7 +66,6 @@ steps:
     scriptLocation: inlineScript
     scriptType: 'bash'
     inlineScript: |
-      ls
       az ml endpoint create -f endpoint.yml -w $(ml-ws) -g $(ml-rg)
       az ml endpoint list -w $(ml-ws) -g $(ml-rg)
 
@@ -90,30 +79,3 @@ steps:
     inlineScript: 'az ml endpoint delete -n aml-demo9000-endpoint -w $(ml-ws) -g $(ml-rg) -y'
 
 # Add potential automated tests
-
-#- task: AzureCLI@2
-#  displayName: 'Create AKS cluster'
-#  inputs:
-#    azureSubscription: $(ml-ws-connection)
-#    workingDirectory: $(ml-path)
-#    scriptLocation: inlineScript
-#    scriptType: 'bash'
-#    inlineScript: 'az ml computetarget create aks --name $(ml-aks-name) --cluster-purpose DevTest'
-
-#- task: AzureCLI@2
-#  displayName: 'Deploy model to AKS for Production'
-#  inputs:
-#    azureSubscription: $(ml-ws-connection)
-#    workingDirectory: $(ml-path)
-#    scriptLocation: inlineScript
-#    scriptType: 'bash'
-#    inlineScript: 'az ml model deploy --name diabetes-prod-aks --ct $(ml-aks-name) -f model.json --ic config/inference-config.yml --dc config/deployment-config-aks.yml  --overwrite'
-
-#- task: AzureCLI@2
-#  displayName: 'Delete deployed service'
-#  inputs:
-#    azureSubscription: $(ml-ws-connection)
-#    workingDirectory: $(ml-path)
-#    scriptLocation: inlineScript
-#    scriptType: 'bash'
-#    inlineScript: 'az ml service delete -n diabetes-qa-aci'
