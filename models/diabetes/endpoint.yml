@@ -1,4 +1,4 @@
-name: my-endpoint
+name: aml-demo9000-endpoint
 type: online
 auth_mode: key
 traffic:
