@@ -12,7 +12,7 @@ deployments:
       local_path: ./865598c2-72f0-4653-82ed-13cc3c8a46bd/outputs/ridge_0.95.pkl # Change top-level folder to use most recent run id
     code_configuration:
       code: 
-        local_path: ./utils/
+        local_path: .
       scoring_script: score.py
     environment: 
       name: env-model1
