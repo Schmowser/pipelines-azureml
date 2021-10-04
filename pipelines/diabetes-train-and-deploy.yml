@@ -87,7 +87,7 @@ steps:
     workingDirectory: $(ml-path)
     scriptLocation: inlineScript
     scriptType: 'bash'
-    inlineScript: 'az ml endpoint delete -n my-endpoint -w $(ml-ws) -g $(ml-rg) -y'
+    inlineScript: 'az ml endpoint delete -n aml-demo9000-endpoint -w $(ml-ws) -g $(ml-rg) -y'
 
 # Add potential automated tests
 
